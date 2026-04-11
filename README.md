@@ -45,3 +45,29 @@ The solver uses a **Backtracking algorithm** to fill empty cells:
 ---
 
 ## 📂 Project Structure
+sudoku-ai-project/
+│
+├── app.py
+├── solver.py
+│
+├── templates/
+│ └── index.html
+│
+├── static/
+│ ├── style.css
+│ └── script.js
+│
+└── README.md
+
+
+---
+
+## ▶️ How to Run
+
+```bash
+pip install flask
+python app.py
+
+Open in browser:
+
+http://127.0.0.1:5000
