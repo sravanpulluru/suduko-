@@ -1,0 +1,112 @@
+<!-- templates/index.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sudoku AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
+    <div class="app-shell">
+      <header class="top-bar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <div>
+            <h1 class="brand-title">Sudoku AI</h1>
+            <p class="brand-tagline">Premium puzzle experience</p>
+          </div>
+        </div>
+
+        <nav class="difficulty-nav" aria-label="Difficulty">
+          <button type="button" class="diff-btn" data-level="easy">Easy</button>
+          <button type="button" class="diff-btn" data-level="medium">Medium</button>
+          <button type="button" class="diff-btn" data-level="hard">Hard</button>
+        </nav>
+      </header>
+
+      <main class="game-layout">
+        <section class="board-section" aria-label="Sudoku board">
+          <div class="board-card" id="boardCard">
+            <form id="sudokuForm" class="board" autocomplete="off" novalidate></form>
+          </div>
+          <p class="board-hint">
+            Select a cell · Type 1-9 or use keypad · Invalid entries are highlighted
+          </p>
+        </section>
+
+        <aside class="control-panel" aria-label="Game controls">
+          <div class="panel-block panel-stats">
+            <h2 class="panel-heading">Game Stats</h2>
+            <div class="stat-row">
+              <span class="stat-label">Timer</span>
+              <span class="stat-value mono timer-value" id="timerDisplay">00:00</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Mistakes</span>
+              <span class="stat-value" id="mistakesDisplay">0 / 3</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Score</span>
+              <span class="stat-value mono" id="scoreDisplay">-</span>
+            </div>
+          </div>
+
+          <div class="panel-block">
+            <h2 class="panel-heading">Number Keypad</h2>
+            <div class="keypad" id="keypad" role="group" aria-label="Number keypad">
+              <button type="button" class="keypad-btn" data-digit="1">1</button>
+              <button type="button" class="keypad-btn" data-digit="2">2</button>
+              <button type="button" class="keypad-btn" data-digit="3">3</button>
+              <button type="button" class="keypad-btn" data-digit="4">4</button>
+              <button type="button" class="keypad-btn" data-digit="5">5</button>
+              <button type="button" class="keypad-btn" data-digit="6">6</button>
+              <button type="button" class="keypad-btn" data-digit="7">7</button>
+              <button type="button" class="keypad-btn" data-digit="8">8</button>
+              <button type="button" class="keypad-btn" data-digit="9">9</button>
+            </div>
+          </div>
+
+          <div class="panel-block">
+            <h2 class="panel-heading">Actions</h2>
+            <div class="panel-actions panel-actions--grid">
+              <button id="btnNewGame" class="btn btn-primary" type="button">New Game</button>
+              <button id="btnHint" class="btn btn-secondary" type="button">Hint</button>
+              <button id="btnUndo" class="btn btn-secondary" type="button">Undo</button>
+              <button id="btnSolve" class="btn btn-secondary" type="button">Solve</button>
+              <button id="btnReset" class="btn btn-ghost" type="button">Reset</button>
+            </div>
+            <p class="status" role="status" aria-live="polite" id="status">
+              Choose a difficulty to start.
+            </p>
+          </div>
+        </aside>
+      </main>
+
+      <footer class="footer">
+        <span>Flask API · Backtracking Solver · Animated UI</span>
+      </footer>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <h3 class="modal-title" id="modalTitle">Game Over</h3>
+        <p class="modal-text" id="modalText">You reached 3 mistakes.</p>
+        <div class="modal-actions">
+          <button id="modalPrimaryBtn" class="btn btn-primary" type="button">Restart Game</button>
+          <button id="modalCloseBtn" class="btn btn-secondary" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
